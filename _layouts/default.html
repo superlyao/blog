@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
-{% include head.html %}
+  {% include head.html %}
 
+  <body class="index">
 
-
-
-
-<body ontouchstart="">
-
-    {% include nav.html %}
+    {% include header.html %}
+    {% include docs_header.html %}
+    {% if page.title %}
+      {% include banner.html %}
+    {% endif %}
 
     {{ content }}
-
+    
     {% include footer.html %}
 
-</body>
-
+  </body>
 </html>
