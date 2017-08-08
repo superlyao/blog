@@ -18,6 +18,11 @@ tag: collection容器
 ```java
 public class ArrayList<E> extends AbstractList<E>
         implements List<E>, RandomAccess, Cloneable, java.io.Serializable
+
+        transient Object[] elementData;
+        private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
+        private static final Object[] EMPTY_ELEMENTDATA = {};
+        private int size;
 ```
 > 在初始化发现一点与jdk1.7不同的地方是：1.7是在创建对象的时候就初始化了大小(大小为10),但是在1.8是在add方法执行的时候
 在初始化了大小，实例化的时候只是一个空数组。优点可能是为了节约内存。
