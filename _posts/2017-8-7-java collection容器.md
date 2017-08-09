@@ -132,9 +132,8 @@ public class ArrayList<E> extends AbstractList<E>
         rangeCheckForAdd(index);
         //检查是不是需要扩容
         ensureCapacityInternal(size + 1);  // Increments modCount!!
-        //复制数组，复制目标位置的
-        System.arraycopy(elementData, index, elementData, index + 1,
-                         size - index);
+        //复制数组，复制目标位置的 (源数组, 起始位置, 目标数组, 目的数组放置的起始位置, 复制的长度)
+        System.arraycopy(elementData, index, elementData, index + 1,size - index);
         elementData[index] = element;
         //元素个数加1
         size++;
@@ -144,5 +143,41 @@ public class ArrayList<E> extends AbstractList<E>
     private void rangeCheckForAdd(int index) {
         if (index > size || index < 0)
             throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+    }
+```
+
+```java
+    public boolean addAll(Collection<? extends E> c) {
+        Object[] a = c.toArray();
+        int numNew = a.length;
+        //扩容
+        ensureCapacityInternal(size + numNew);  // Increments modCount
+        System.arraycopy(a, 0, elementData, size, numNew);
+        size += numNew;
+        return numNew != 0;
+    }
+
+    public Object[] toArray() {
+        return Arrays.copyOf(elementData, size);
+    }
+```
+
+```java
+    public boolean addAll(int index, Collection<? extends E> c) {
+        //检查下标是否合法
+        rangeCheckForAdd(index);
+
+        Object[] a = c.toArray();
+        int numNew = a.length;
+        ensureCapacityInternal(size + numNew);  // Increments modCount
+
+        int numMoved = size - index;
+        if (numMoved > 0)
+            System.arraycopy(elementData, index, elementData, index + numNew,
+                             numMoved);
+
+        System.arraycopy(a, 0, elementData, index, numNew);
+        size += numNew;
+        return numNew != 0;
     }
 ```
