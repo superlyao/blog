@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "java collection容器"
+title:  "java collection容器 ArrayList"
 date:   2017-8-7
 categories: Java
 tag: collection容器
@@ -179,5 +179,24 @@ public class ArrayList<E> extends AbstractList<E>
         System.arraycopy(a, 0, elementData, index, numNew);
         size += numNew;
         return numNew != 0;
+    }
+```
+
+```java
+    //返回被删除的元素
+   public E remove(int index) {
+       //检查下标是否越界
+        rangeCheck(index);
+
+        modCount++;
+        E oldValue = elementData(index);
+
+        int numMoved = size - index - 1;
+        if (numMoved > 0)
+            System.arraycopy(elementData, index+1, elementData, index,
+                             numMoved);
+        elementData[--size] = null; // clear to let GC do its work
+
+        return oldValue;
     }
 ```
