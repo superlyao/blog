@@ -200,3 +200,9 @@ public class ArrayList<E> extends AbstractList<E>
         return oldValue;
     }
 ```
+
+```java
+ public boolean isEmpty() {
+        return size == 0;
+    }
+```
