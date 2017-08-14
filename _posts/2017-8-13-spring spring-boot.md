@@ -61,3 +61,11 @@ public class SpringBootTest {
     }
 }
 ```
+
+- 它们都是由Spring Boot框架提供。在SpringApplication.run()方法执行后，Spring Boot的autoconfigure发现这是一个Web应用（根据类路径上的依赖确定），于是在内嵌的Tomcat容器中启动了一个Spring的应用上下文，并且监听默认的tcp端口8080（默认约定）。同时在Spring Context中根据默认的约定配置了Spring WebMvc：
+
+* Servlet容器默认的Context路径是/
+* DispatherServlet匹配的路径(servlet-mapping中的url-patterns)是/*
+* @ComponentScan路径被默认设置为SampleController的同名package，也就是该package下的所有@Controller，@Service, * * * @Component, @Repository都会被实例化后并加入Spring Context中。
+
+- 没有一行配置代码、也没有web.xml。基于Spring Boot的应用在大多数情况下都不需要我们去显式地声明各类配置，而是将最常用的默认配置作为约定，在不声明的情况下也能适应大多数的开发场景。
