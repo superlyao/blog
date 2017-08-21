@@ -21,7 +21,11 @@ tag: collection容器
 
 public class LinkedList<E>
     extends AbstractSequentialList<E>
-    implements List<E>, Deque<E>, Cloneable, java.io.Serializable
+    implements List<E>, Deque<E>, Cloneable, java.io.Serializable {
+        transient int size = 0;//链表元素个数
+        transient Node<E> first;//头元素
+        transient Node<E> last;//尾元素
+    }
 ```
 
 ```java
